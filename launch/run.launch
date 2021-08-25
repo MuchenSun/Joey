@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="joy_topic" default="joy"/>
+    <arg name="cmd_topic" default="cmd_vel"/>
+    <arg name="max_lin_vel" default="1.0"/>
+    <arg name="max_ang_vel" default="1.5"/>
+    <arg name="lin_boost_ratio" default="0.4"/>
+    <arg name="ang_boost_ratio" default="0.6"/>
+
+    <node name="joy_node" pkg="joy" type="joy_node" output="screen"/>
+
+    <node name="aionjoy_node" pkg="aionjoy" type="aionjoy_node" output="screen">
+        <param name="joy_topic" value="$(arg joy_topic)"/>
+        <param name="cmd_topic" value="$(arg cmd_topic)"/>
+        <param name="max_lin_vel" value="$(arg max_lin_vel)"/>
+        <param name="max_ang_vel" value="$(arg max_ang_vel)"/>
+        <param name="lin_boost_ratio" value="$(arg lin_boost_ratio)"/>
+        <param name="ang_boost_ratio" value="$(arg ang_boost_ratio)"/>
+    </node>
+</launch>
