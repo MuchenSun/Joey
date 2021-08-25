@@ -4,16 +4,16 @@ namespace Joey {
     teleop::teleop(ros::NodeHandle *nh): nh_(*nh) {
         // read in parameters
         std::string joy_topic, cmd_topic;
-        nh_.getParam("/aionjoy_node/joy_topic", joy_topic);
-        nh_.getParam("/aionjoy_node/cmd_topic", cmd_topic);
+        nh_.getParam("/joey_node/joy_topic", joy_topic);
+        nh_.getParam("/joey_node/cmd_topic", cmd_topic);
         ROS_INFO_STREAM("subscribe to joystick topic: " << joy_topic);
         ROS_INFO_STREAM("publish to cmd topic: " << cmd_topic);
 
         // double max_lin_vel, max_ang_vel, lin_boost_ratio, ang_boost_ratio;
-        nh_.getParam("/aionjoy_node/max_lin_vel", max_lin_vel_);
-        nh_.getParam("/aionjoy_node/max_ang_vel", max_ang_vel_);
-        nh_.getParam("/aionjoy_node/lin_boost_ratio", lin_boost_ratio_);
-        nh_.getParam("/aionjoy_node/ang_boost_ratio", ang_boost_ratio_);
+        nh_.getParam("/joey_node/max_lin_vel", max_lin_vel_);
+        nh_.getParam("/joey_node/max_ang_vel", max_ang_vel_);
+        nh_.getParam("/joey_node/lin_boost_ratio", lin_boost_ratio_);
+        nh_.getParam("/joey_node/ang_boost_ratio", ang_boost_ratio_);
         
         // node config
         joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 1, &teleop::joy_cb, this);

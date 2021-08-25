@@ -9,7 +9,7 @@
 
     <node name="joy_node" pkg="joy" type="joy_node" output="screen"/>
 
-    <node name="aionjoy_node" pkg="aionjoy" type="aionjoy_node" output="screen">
+    <node name="joey_node" pkg="Joey" type="Joey_node" output="screen">
         <param name="joy_topic" value="$(arg joy_topic)"/>
         <param name="cmd_topic" value="$(arg cmd_topic)"/>
         <param name="max_lin_vel" value="$(arg max_lin_vel)"/>
