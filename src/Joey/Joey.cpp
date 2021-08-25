@@ -25,13 +25,18 @@ namespace Joey {
     }
 
     void teleop::joy_cb(const sensor_msgs::Joy::ConstPtr& joy_msg) {
-        int stop_button = joy_msg->buttons[0];
+        if(joy_msg->buttons[2] == 1) { // recover from shutdown mode
+            shutdown_ = false;
+        }
+        if(joy_msg->buttons[0] == 1) { // enable shutdown mode
+            shutdown_ = true;
+        }
 
-        if(stop_button != 1) {
+        if(!shutdown_) {
             double lin_scale = joy_msg->axes[1];
-            double lin_boost = lin_boost_ratio_ + joy_msg->buttons[6] * (1-lin_boost_ratio_);
-            double ang_scale = joy_msg->axes[2];
-            double ang_boost = ang_boost_ratio_ + joy_msg->buttons[7] * (1-ang_boost_ratio_);
+            double lin_boost = lin_boost_ratio_ + (1-joy_msg->axes[2]) * (1-lin_boost_ratio_) / 2;
+            double ang_scale = joy_msg->axes[3];
+            double ang_boost = ang_boost_ratio_ + (1-joy_msg->axes[5]) * (1-ang_boost_ratio_) / 2;
 
             cmd_.linear.x = max_lin_vel_ * lin_scale * lin_boost;
             cmd_.linear.y = 0.0;

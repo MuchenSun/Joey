@@ -20,6 +20,7 @@ namespace Joey
         geometry_msgs::Twist cmd_;
     
         double max_lin_vel_, max_ang_vel_, lin_boost_ratio_, ang_boost_ratio_;
+        bool shutdown_;
 
         void joy_cb(const sensor_msgs::Joy::ConstPtr& joy_msg);
     };
