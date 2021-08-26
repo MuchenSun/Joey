@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="joy_topic" default="joy"/>
+    <arg name="cmd_topic" default="cmd_vel"/>
+
+    <arg name="max_lin_vel" default="1.0"/>
+    <arg name="max_ang_vel" default="1.5"/>
+    <arg name="lin_boost_ratio" default="0.4"/>
+    <arg name="ang_boost_ratio" default="0.6"/>
+
+    <arg name="fractional_boost" default="false"/>
+    <arg name="lin_vel_axis" default="1"/>
+    <arg name="lin_boost_axis" default="6"/>
+    <arg name="ang_vel_axis" default="2"/>
+    <arg name="ang_boost_axis" default="7"/>
+    <arg name="shutdown_axis" default="1"/>
+    <arg name="recover_axis" default="3"/>
+
+
+    <node name="joy_node" pkg="joy" type="joy_node" output="screen"/>
+
+    <node name="joey_node" pkg="Joey" type="Joey_node" output="screen">
+        <param name="joy_topic" value="$(arg joy_topic)"/>
+        <param name="cmd_topic" value="$(arg cmd_topic)"/>
+        
+        <param name="max_lin_vel" value="$(arg max_lin_vel)"/>
+        <param name="max_ang_vel" value="$(arg max_ang_vel)"/>
+        <param name="lin_boost_ratio" value="$(arg lin_boost_ratio)"/>
+        <param name="ang_boost_ratio" value="$(arg ang_boost_ratio)"/>
+
+        <param name="fractional_boost" value="$(arg fractional_boost)"/>
+        <param name="lin_vel_axis" value="$(arg lin_vel_axis)"/>
+        <param name="lin_boost_axis" value="$(arg lin_boost_axis)"/>
+        <param name="ang_vel_axis" value="$(arg ang_vel_axis)"/>
+        <param name="ang_boost_axis" value="$(arg ang_boost_axis)"/>
+        <param name="shutdown_axis" value="$(arg shutdown_axis)"/>
+        <param name="recover_axis" value="$(arg recover_axis)"/>
+    </node>
+</launch>
